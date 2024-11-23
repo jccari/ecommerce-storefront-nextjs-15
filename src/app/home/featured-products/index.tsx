@@ -1,0 +1,21 @@
+import ProductCard from "@/components/product-card";
+import { Product } from "@/types/product";
+
+export default async function FeaturedProducts() {
+  const response = await fetch("https://fakestoreapi.com/products?limit=5");
+
+  const data: Product[] = await response.json();
+
+  return (
+    <div className="basis-3/4 p-5">
+      <h2 className="font-bold pb-5">Featured Products</h2>
+      <div>
+        <ul className="flex flex-wrap gap-4 justify-center">
+          {data.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
