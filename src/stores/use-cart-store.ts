@@ -40,7 +40,7 @@ const useCartStore = create<CartStore>()((set, get) => ({
             return {
               ...p,
               quantity: p.quantity + 1,
-              lineItemTotal: p.lineItemTotal + p.price,
+              lineItemTotal: Number((p.lineItemTotal + p.price).toFixed(2)),
             };
           }
 
