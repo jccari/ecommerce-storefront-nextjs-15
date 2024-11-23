@@ -4,7 +4,7 @@ interface ProductLineItemProps {
   product: Product;
 }
 
-function ProductLineItem({ product }) {
+function ProductLineItem({ product }: ProductLineItemProps) {
   return (
     <div className="h-12 p-2 border-t-2 border-gray-400">{product.title}</div>
   );
