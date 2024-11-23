@@ -1,7 +1,7 @@
 import ProductCard from "@/components/product-card";
 import { Product } from "@/types/product";
 
-export default async function FeaturedProducts() {
+async function FeaturedProducts() {
   const response = await fetch("https://fakestoreapi.com/products?limit=5");
 
   const data: Product[] = await response.json();
@@ -19,3 +19,5 @@ export default async function FeaturedProducts() {
     </div>
   );
 }
+
+export default FeaturedProducts;
