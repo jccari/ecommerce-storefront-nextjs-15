@@ -16,9 +16,9 @@ function ShoppingCartContent() {
 
   return (
     <ul className="flex flex-wrap gap-2 justify-center">
-      {cart.map((product) => (
-        <li key={product.id} className="w-full">
-          <ProductLineItem product={product} />
+      {cart.map((productLineItem) => (
+        <li key={productLineItem.id} className="w-full">
+          <ProductLineItem lineItem={productLineItem} />
         </li>
       ))}
     </ul>

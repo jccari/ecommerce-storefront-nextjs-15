@@ -1,12 +1,15 @@
-import { Product } from "@/types/product";
+import { ProductLineItem as LineItem } from "@/types/product-line-item";
 
 interface ProductLineItemProps {
-  product: Product;
+  lineItem: LineItem;
 }
 
-function ProductLineItem({ product }: ProductLineItemProps) {
+function ProductLineItem({ lineItem }: ProductLineItemProps) {
   return (
-    <div className="h-12 p-2 border-t-2 border-gray-400">{product.title}</div>
+    <div className="h-16 p-2 border-t-2 border-gray-400">
+      <p>{lineItem.title}</p>
+      <p>{lineItem.quantity}</p>
+    </div>
   );
 }
 
