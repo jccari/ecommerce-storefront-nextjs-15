@@ -26,11 +26,19 @@ function ShoppingCartContent() {
 }
 
 function ShoppingCart() {
+  const { clearCart } = useCartStore();
+
   return (
     <div className="basis-1/4">
       <div className="flex flex-col h-2/3 w-full rounded-lg border-4 border-teal-600">
-        <div className="basis-1/12 p-2">
+        <div className="flex justify-between basis-1/12 p-2">
           <h2 className="font-bold pb-5">Shopping Cart</h2>
+          <button
+            onClick={clearCart}
+            className="w-22 h-10 px-2 py-1 border rounded-md"
+          >
+            Clear Cart
+          </button>
         </div>
         <div className="basis-10/12 grow-0">
           <ShoppingCartContent />

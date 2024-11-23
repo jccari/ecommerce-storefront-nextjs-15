@@ -10,6 +10,7 @@ function convertProductToLineItem(product: Product): ProductLineItem {
     price: product.price,
     image: product.image,
     quantity: 1,
+    lineItemTotal: product.price,
   };
 }
 
@@ -20,6 +21,7 @@ type CartStoreState = {
 type CartStoreActions = {
   addToCart: (product: Product) => void;
   removeFromCart: (product: Product) => void;
+  clearCart: () => void;
 };
 
 type CartStore = CartStoreState & CartStoreActions;
@@ -38,6 +40,7 @@ const useCartStore = create<CartStore>()((set, get) => ({
             return {
               ...p,
               quantity: p.quantity + 1,
+              lineItemTotal: p.lineItemTotal + p.price,
             };
           }
 
@@ -56,6 +59,9 @@ const useCartStore = create<CartStore>()((set, get) => ({
     set((state) => ({
       cart: state.cart.filter((p) => p.id !== product.id),
     }));
+  },
+  clearCart: () => {
+    set({ cart: [] });
   },
 }));
 

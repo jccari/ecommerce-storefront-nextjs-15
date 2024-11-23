@@ -4,4 +4,5 @@ export interface ProductLineItem {
   price: number;
   image: string;
   quantity: number;
+  lineItemTotal: number;
 }
