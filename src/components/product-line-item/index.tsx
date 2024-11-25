@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ProductLineItem as LineItem } from "@/types/product-line-item";
 
 interface ProductLineItemProps {
@@ -6,10 +7,22 @@ interface ProductLineItemProps {
 
 function ProductLineItem({ lineItem }: ProductLineItemProps) {
   return (
-    <div className="h-20 p-2 border-t-2 border-gray-400">
-      <p>{lineItem.title}</p>
-      <p>{lineItem.quantity}</p>
-      <p>{lineItem.lineItemTotal}</p>
+    <div className="flex h-20 w-full p-2 border-t-2 border-gray-400">
+      <div className="basis-2/12">
+        <Image
+          src={lineItem.image}
+          alt={lineItem.title}
+          width={45}
+          height={45}
+        />
+      </div>
+      <div className="basis-8/12">
+        <p className="text-sm">{lineItem.title}</p>
+      </div>
+      <div className="basis-2/4">
+        <p className="text-sm">Cantidad: {lineItem.quantity}</p>
+        <p className="text-sm">Total: {lineItem.lineItemTotal.toFixed(2)}</p>
+      </div>
     </div>
   );
 }

@@ -10,7 +10,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const { addToCart } = useCartStore();
+  const addToCart = useCartStore((state) => state.addToCart);
 
   return (
     <div className="flex flex-col justify-between bg-white shadow-md rounded-lg p-4 gap-4 hover:shadow-zinc-600 w-72 ">

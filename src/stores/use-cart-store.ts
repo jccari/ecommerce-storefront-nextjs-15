@@ -16,6 +16,11 @@ function convertProductToLineItem(product: Product): ProductLineItem {
 
 type CartStoreState = {
   cart: ProductLineItem[];
+  priceLines: {
+    lineItemsTotal: string;
+    taxes: string;
+    total: string;
+  };
 };
 
 type CartStoreActions = {
@@ -26,8 +31,34 @@ type CartStoreActions = {
 
 type CartStore = CartStoreState & CartStoreActions;
 
+function updatePriceLines(cart: ProductLineItem[]) {
+  const lineItemsTotal = cart.reduce(
+    (acc, item) => acc + item.lineItemTotal,
+    0
+  );
+
+  // Calculate taxes (18% IGV)
+  const taxes = cart.reduce(
+    (acc, item) => acc + item.price * item.quantity * 0.18,
+    0
+  );
+
+  const total = lineItemsTotal + taxes;
+
+  return {
+    lineItemsTotal: lineItemsTotal.toFixed(2),
+    taxes: taxes.toFixed(2),
+    total: total.toFixed(2),
+  };
+}
+
 const useCartStore = create<CartStore>()((set, get) => ({
   cart: [],
+  priceLines: {
+    lineItemsTotal: "0.00",
+    taxes: "0.00",
+    total: "0.00",
+  },
   addToCart: (product: Product) => {
     const currentCart = get().cart;
 
@@ -47,6 +78,10 @@ const useCartStore = create<CartStore>()((set, get) => ({
           return p;
         }),
       }));
+
+      set(() => ({
+        priceLines: updatePriceLines(currentCart),
+      }));
     } else {
       const productLineItem = convertProductToLineItem(product);
 
@@ -62,6 +97,10 @@ const useCartStore = create<CartStore>()((set, get) => ({
   },
   clearCart: () => {
     set({ cart: [] });
+
+    set(() => ({
+      priceLines: updatePriceLines(get().cart),
+    }));
   },
 }));
 
