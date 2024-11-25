@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import ProductLineItem from "@/components/product-line-item";
 import useCartStore from "@/stores/use-cart-store";
+import PriceLine from "./price-line";
 
 function ShoppingCartContent() {
   const cart = useCartStore((state) => state.cart);
@@ -25,15 +26,6 @@ function ShoppingCartContent() {
         </li>
       ))}
     </ul>
-  );
-}
-
-function PriceLine({ concept, value }: { concept: string; value: string }) {
-  return (
-    <div className="flex justify-between mx-3">
-      <p className="text-sm">{concept}</p>
-      <p className="text-sm font-bold">$ {value}</p>
-    </div>
   );
 }
 
