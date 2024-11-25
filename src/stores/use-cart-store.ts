@@ -1,8 +1,11 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 import { Product } from "@/types/product";
 import { ProductLineItem } from "@/types/product-line-item";
 import { convertProductToLineItem, updatePriceLines } from "./utils";
+
+const StorageKey = "cart";
 
 type CartStoreState = {
   cart: ProductLineItem[];
@@ -21,6 +24,9 @@ type CartStoreActions = {
 
 type CartStore = CartStoreState & CartStoreActions;
 
+// TODO: We could use a more robust storage solution
+const storedCart = localStorage.getItem(StorageKey);
+
 const initialState: CartStoreState = {
   cart: [],
   priceLines: {
@@ -30,45 +36,56 @@ const initialState: CartStoreState = {
   },
 };
 
-const useCartStore = create<CartStore>()((set, get) => ({
-  ...initialState,
-  addToCart: (product: Product) => {
-    const lineItem = get().cart.find((p) => p.id === product.id);
+const initialStoreState: CartStoreState = storedCart
+  ? JSON.parse(storedCart)
+  : initialState;
 
-    if (lineItem) {
-      set((state) => ({
-        cart: state.cart.map((p) => {
-          if (p.id === product.id) {
-            return {
-              ...p,
-              quantity: p.quantity + 1,
-              lineItemTotal: Number((p.lineItemTotal + p.price).toFixed(2)),
-            };
-          }
+const useCartStore = create<CartStore>()(
+  persist(
+    (set, get) => ({
+      ...initialStoreState,
+      addToCart: (product: Product) => {
+        const lineItem = get().cart.find((p) => p.id === product.id);
 
-          return p;
-        }),
-      }));
-    } else {
-      const productLineItem = convertProductToLineItem(product);
+        if (lineItem) {
+          set((state) => ({
+            cart: state.cart.map((p) => {
+              if (p.id === product.id) {
+                return {
+                  ...p,
+                  quantity: p.quantity + 1,
+                  lineItemTotal: Number((p.lineItemTotal + p.price).toFixed(2)),
+                };
+              }
 
-      set((state) => ({
-        cart: [...state.cart, productLineItem],
-      }));
+              return p;
+            }),
+          }));
+        } else {
+          const productLineItem = convertProductToLineItem(product);
+
+          set((state) => ({
+            cart: [...state.cart, productLineItem],
+          }));
+        }
+
+        set((state) => ({
+          priceLines: updatePriceLines(state.cart),
+        }));
+      },
+      removeFromCart: (product: Product) => {
+        set((state) => ({
+          cart: state.cart.filter((p) => p.id !== product.id),
+        }));
+      },
+      clearCart: () => {
+        set(initialState);
+      },
+    }),
+    {
+      name: StorageKey,
     }
-
-    set((state) => ({
-      priceLines: updatePriceLines(state.cart),
-    }));
-  },
-  removeFromCart: (product: Product) => {
-    set((state) => ({
-      cart: state.cart.filter((p) => p.id !== product.id),
-    }));
-  },
-  clearCart: () => {
-    set(initialState);
-  },
-}));
+  )
+);
 
 export default useCartStore;
