@@ -64,9 +64,7 @@ const initialState: CartStoreState = {
 const useCartStore = create<CartStore>()((set, get) => ({
   ...initialState,
   addToCart: (product: Product) => {
-    const currentCart = get().cart;
-
-    const lineItem = currentCart.find((p) => p.id === product.id);
+    const lineItem = get().cart.find((p) => p.id === product.id);
 
     if (lineItem) {
       set((state) => ({
@@ -82,10 +80,6 @@ const useCartStore = create<CartStore>()((set, get) => ({
           return p;
         }),
       }));
-
-      set(() => ({
-        priceLines: updatePriceLines(currentCart),
-      }));
     } else {
       const productLineItem = convertProductToLineItem(product);
 
@@ -93,6 +87,10 @@ const useCartStore = create<CartStore>()((set, get) => ({
         cart: [...state.cart, productLineItem],
       }));
     }
+
+    set((state) => ({
+      priceLines: updatePriceLines(state.cart),
+    }));
   },
   removeFromCart: (product: Product) => {
     set((state) => ({

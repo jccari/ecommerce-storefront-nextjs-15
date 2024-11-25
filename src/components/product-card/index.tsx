@@ -25,7 +25,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <p>${product.price}</p>
       <button
         className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-        onClick={addToCart.bind(null, product)}
+        onClick={() => addToCart(product)}
       >
         Add to Cart
       </button>
