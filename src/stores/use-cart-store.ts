@@ -52,13 +52,17 @@ function updatePriceLines(cart: ProductLineItem[]) {
   };
 }
 
-const useCartStore = create<CartStore>()((set, get) => ({
+const initialState: CartStoreState = {
   cart: [],
   priceLines: {
     lineItemsTotal: "0.00",
     taxes: "0.00",
     total: "0.00",
   },
+};
+
+const useCartStore = create<CartStore>()((set, get) => ({
+  ...initialState,
   addToCart: (product: Product) => {
     const currentCart = get().cart;
 
@@ -96,11 +100,7 @@ const useCartStore = create<CartStore>()((set, get) => ({
     }));
   },
   clearCart: () => {
-    set({ cart: [] });
-
-    set(() => ({
-      priceLines: updatePriceLines(get().cart),
-    }));
+    set(initialState);
   },
 }));
 
