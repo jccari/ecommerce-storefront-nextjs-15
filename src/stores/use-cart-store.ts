@@ -18,7 +18,7 @@ type CartStoreState = {
 
 type CartStoreActions = {
   addToCart: (product: Product) => void
-  removeFromCart: (product: Product) => void
+  removeFromCart: (lineItemId: number) => void
   clearCart: () => void
 }
 
@@ -73,9 +73,9 @@ const useCartStore = create<CartStore>()(
           priceLines: updatePriceLines(state.cart),
         }))
       },
-      removeFromCart: (product: Product) => {
+      removeFromCart: (lineItemId: number) => {
         set((state) => ({
-          cart: state.cart.filter((p) => p.id !== product.id),
+          cart: state.cart.filter((p) => p.id !== lineItemId),
         }))
       },
       clearCart: () => {
@@ -84,8 +84,8 @@ const useCartStore = create<CartStore>()(
     }),
     {
       name: StorageKey,
-    },
-  ),
+    }
+  )
 )
 
 export default useCartStore
