@@ -7,7 +7,7 @@ async function FeaturedProducts() {
   const data: Product[] = await response.json()
 
   return (
-    <div className="basis-3/4 p-5">
+    <div className="flex flex-col items-center basis-3/4 p-5">
       <h2 className="font-bold pb-5">Featured Products</h2>
       <div>
         <ul className="flex flex-wrap gap-4 justify-center">
