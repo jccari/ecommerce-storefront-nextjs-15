@@ -4,7 +4,7 @@ function PriceLine({ concept, value }: { concept: string; value: string }) {
       <p className="text-sm">{concept}</p>
       <p className="text-sm font-bold">$ {value}</p>
     </div>
-  );
+  )
 }
 
-export default PriceLine;
+export default PriceLine

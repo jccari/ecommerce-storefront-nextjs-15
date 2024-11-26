@@ -1,13 +1,13 @@
-"use client";
+"use client"
 
-import Image from "next/image";
+import Image from "next/image"
 
-import ProductLineItem from "@/components/product-line-item";
-import useCartStore from "@/stores/use-cart-store";
-import PriceLine from "./price-line";
+import ProductLineItem from "@/components/product-line-item"
+import useCartStore from "@/stores/use-cart-store"
+import PriceLine from "./price-line"
 
 function ShoppingCartContent() {
-  const cart = useCartStore((state) => state.cart);
+  const cart = useCartStore((state) => state.cart)
 
   if (cart.length === 0) {
     return (
@@ -15,7 +15,7 @@ function ShoppingCartContent() {
         <Image src="empty-cart.svg" alt="Empty Cart" width={50} height={50} />
         <h3 className="font-bold">Your cart is empty</h3>
       </div>
-    );
+    )
   }
 
   return (
@@ -26,13 +26,13 @@ function ShoppingCartContent() {
         </li>
       ))}
     </ul>
-  );
+  )
 }
 
 function ShoppingCart() {
-  const clearCart = useCartStore((state) => state.clearCart);
+  const clearCart = useCartStore((state) => state.clearCart)
 
-  const priceLines = useCartStore((state) => state.priceLines);
+  const priceLines = useCartStore((state) => state.priceLines)
 
   return (
     <div className="basis-1/4">
@@ -62,7 +62,7 @@ function ShoppingCart() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default ShoppingCart;
+export default ShoppingCart

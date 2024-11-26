@@ -1,5 +1,5 @@
-import FeaturedProducts from "./featured-products";
-import ShoppingCart from "./shopping-cart";
+import FeaturedProducts from "./featured-products"
+import ShoppingCart from "./shopping-cart"
 
 export default function Home() {
   return (
@@ -7,5 +7,5 @@ export default function Home() {
       <ShoppingCart />
       <FeaturedProducts />
     </div>
-  );
+  )
 }

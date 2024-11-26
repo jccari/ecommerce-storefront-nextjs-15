@@ -1,16 +1,16 @@
-"use client";
+"use client"
 
-import Image from "next/image";
+import Image from "next/image"
 
-import { Product } from "@/types/product";
-import useCartStore from "@/stores/use-cart-store";
+import { Product } from "@/types/product"
+import useCartStore from "@/stores/use-cart-store"
 
 interface ProductCardProps {
-  product: Product;
+  product: Product
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const addToCart = useCartStore((state) => state.addToCart);
+  const addToCart = useCartStore((state) => state.addToCart)
 
   return (
     <div className="flex flex-col justify-between bg-white shadow-md rounded-lg p-4 gap-4 hover:shadow-zinc-600 w-72 ">
@@ -30,5 +30,5 @@ export default function ProductCard({ product }: ProductCardProps) {
         Add to Cart
       </button>
     </div>
-  );
+  )
 }

@@ -1,8 +1,8 @@
-import Image from "next/image";
-import { ProductLineItem as LineItem } from "@/types/product-line-item";
+import Image from "next/image"
+import { ProductLineItem as LineItem } from "@/types/product-line-item"
 
 interface ProductLineItemProps {
-  lineItem: LineItem;
+  lineItem: LineItem
 }
 
 function ProductLineItem({ lineItem }: ProductLineItemProps) {
@@ -24,7 +24,7 @@ function ProductLineItem({ lineItem }: ProductLineItemProps) {
         <p className="text-sm">Total: {lineItem.lineItemTotal.toFixed(2)}</p>
       </div>
     </div>
-  );
+  )
 }
 
-export default ProductLineItem;
+export default ProductLineItem

@@ -1,10 +1,10 @@
-import ProductCard from "@/components/product-card";
-import { Product } from "@/types/product";
+import ProductCard from "@/components/product-card"
+import { Product } from "@/types/product"
 
 async function FeaturedProducts() {
-  const response = await fetch("https://fakestoreapi.com/products?limit=5");
+  const response = await fetch("https://fakestoreapi.com/products?limit=5")
 
-  const data: Product[] = await response.json();
+  const data: Product[] = await response.json()
 
   return (
     <div className="basis-3/4 p-5">
@@ -17,7 +17,7 @@ async function FeaturedProducts() {
         </ul>
       </div>
     </div>
-  );
+  )
 }
 
-export default FeaturedProducts;
+export default FeaturedProducts

@@ -1,8 +1,8 @@
 export interface ProductLineItem {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-  quantity: number;
-  lineItemTotal: number;
+  id: number
+  title: string
+  price: number
+  image: string
+  quantity: number
+  lineItemTotal: number
 }

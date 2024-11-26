@@ -1,31 +1,31 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { create } from "zustand"
+import { persist } from "zustand/middleware"
 
-import { Product } from "@/types/product";
-import { ProductLineItem } from "@/types/product-line-item";
-import { convertProductToLineItem, updatePriceLines } from "./utils";
+import { Product } from "@/types/product"
+import { ProductLineItem } from "@/types/product-line-item"
+import { convertProductToLineItem, updatePriceLines } from "./utils"
 
-const StorageKey = "cart";
+const StorageKey = "cart"
 
 type CartStoreState = {
-  cart: ProductLineItem[];
+  cart: ProductLineItem[]
   priceLines: {
-    lineItemsTotal: string;
-    taxes: string;
-    total: string;
-  };
-};
+    lineItemsTotal: string
+    taxes: string
+    total: string
+  }
+}
 
 type CartStoreActions = {
-  addToCart: (product: Product) => void;
-  removeFromCart: (product: Product) => void;
-  clearCart: () => void;
-};
+  addToCart: (product: Product) => void
+  removeFromCart: (product: Product) => void
+  clearCart: () => void
+}
 
-type CartStore = CartStoreState & CartStoreActions;
+type CartStore = CartStoreState & CartStoreActions
 
 // TODO: We could use a more robust storage solution
-const storedCart = localStorage.getItem(StorageKey);
+const storedCart = localStorage.getItem(StorageKey)
 
 const initialState: CartStoreState = {
   cart: [],
@@ -34,18 +34,18 @@ const initialState: CartStoreState = {
     taxes: "0.00",
     total: "0.00",
   },
-};
+}
 
 const initialStoreState: CartStoreState = storedCart
   ? JSON.parse(storedCart)
-  : initialState;
+  : initialState
 
 const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       ...initialStoreState,
       addToCart: (product: Product) => {
-        const lineItem = get().cart.find((p) => p.id === product.id);
+        const lineItem = get().cart.find((p) => p.id === product.id)
 
         if (lineItem) {
           set((state) => ({
@@ -55,37 +55,37 @@ const useCartStore = create<CartStore>()(
                   ...p,
                   quantity: p.quantity + 1,
                   lineItemTotal: Number((p.lineItemTotal + p.price).toFixed(2)),
-                };
+                }
               }
 
-              return p;
+              return p
             }),
-          }));
+          }))
         } else {
-          const productLineItem = convertProductToLineItem(product);
+          const productLineItem = convertProductToLineItem(product)
 
           set((state) => ({
             cart: [...state.cart, productLineItem],
-          }));
+          }))
         }
 
         set((state) => ({
           priceLines: updatePriceLines(state.cart),
-        }));
+        }))
       },
       removeFromCart: (product: Product) => {
         set((state) => ({
           cart: state.cart.filter((p) => p.id !== product.id),
-        }));
+        }))
       },
       clearCart: () => {
-        set(initialState);
+        set(initialState)
       },
     }),
     {
       name: StorageKey,
-    }
-  )
-);
+    },
+  ),
+)
 
-export default useCartStore;
+export default useCartStore
