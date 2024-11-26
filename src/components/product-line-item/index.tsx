@@ -10,17 +10,17 @@ function ProductLineItem({ lineItem }: ProductLineItemProps) {
   const removeFromCart = useCartStore((state) => state.removeFromCart)
 
   return (
-    <div className="flex h-20 w-full p-2 border-t-2 border-gray-400">
-      <div className="basis-2/12">
+    <div className="flex h-20 w-full p-2 border-t-2 border-gray-400 gap-1">
+      <div className="flex items-center justify-center basis-2/12">
         <Image
           src={lineItem.image}
           alt={lineItem.title}
-          width={45}
-          height={45}
+          width={35}
+          height={35}
         />
       </div>
       <div className="basis-8/12">
-        <p className="text-sm">{lineItem.title}</p>
+        <p className="text-sm line-clamp-3">{lineItem.title}</p>
       </div>
       <div className="flex justify-between basis-2/4">
         <div>
