@@ -35,7 +35,7 @@ function ShoppingCart() {
   const priceLines = useCartStore((state) => state.priceLines)
 
   return (
-    <div className="basis-1/4">
+    <div className="flex items-center basis-1/4">
       <div className="flex flex-col h-2/3 p-2 w-full rounded-lg border-4 bg-slate-100">
         <div className="flex justify-between basis-1/12 p-2">
           <h2 className="font-bold pb-5 text-lg">Shopping Cart</h2>
@@ -51,7 +51,7 @@ function ShoppingCart() {
         </div>
         <div className="basis-1/12">
           <div className="border-t-4 text-sm">
-            <p className="font-semibold mb-2">Resumen de compra</p>
+            <p className="font-semibold my-2">Resumen de compra</p>
             <PriceLine concept="Productos" value={priceLines.lineItemsTotal} />
             <PriceLine concept="Taxes IGV" value={priceLines.taxes} />
             <PriceLine concept="Total" value={priceLines.total} />
