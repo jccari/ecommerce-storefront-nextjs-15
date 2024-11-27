@@ -20,7 +20,7 @@ function ShoppingCartContent() {
     }
 
     return (
-      <ul className="flex flex-col gap-2 overflow-y-auto h-full">
+      <ul className="flex flex-col gap-2">
         {cart.map((productLineItem) => (
           <li key={productLineItem.id} className="w-full">
             <ProductLineItem lineItem={productLineItem} />
@@ -30,7 +30,11 @@ function ShoppingCartContent() {
     )
   }
 
-  return <div className="flex flex-1 border-t-4">{renderContent()}</div>
+  return (
+    <div className="flex flex-1 overflow-y-auto border-t-4">
+      {renderContent()}
+    </div>
+  )
 }
 
 function ShoppingCart() {
