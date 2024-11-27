@@ -9,24 +9,28 @@ import PriceLine from "./price-line"
 function ShoppingCartContent() {
   const cart = useCartStore((state) => state.cart)
 
-  if (cart.length === 0) {
+  function renderContent() {
+    if (cart.length === 0) {
+      return (
+        <div className="flex flex-col flex-1 self-center gap-2 items-center">
+          <Image src="empty-cart.svg" alt="Empty Cart" width={50} height={50} />
+          <h3 className="font-bold">Your cart is empty</h3>
+        </div>
+      )
+    }
+
     return (
-      <div className="flex flex-col flex-1 self-center gap-2 items-center">
-        <Image src="empty-cart.svg" alt="Empty Cart" width={50} height={50} />
-        <h3 className="font-bold">Your cart is empty</h3>
-      </div>
+      <ul className="flex flex-col gap-2 overflow-y-auto h-full">
+        {cart.map((productLineItem) => (
+          <li key={productLineItem.id} className="w-full">
+            <ProductLineItem lineItem={productLineItem} />
+          </li>
+        ))}
+      </ul>
     )
   }
 
-  return (
-    <ul className="flex flex-col gap-2">
-      {cart.map((productLineItem) => (
-        <li key={productLineItem.id} className="w-full">
-          <ProductLineItem lineItem={productLineItem} />
-        </li>
-      ))}
-    </ul>
-  )
+  return <div className="flex flex-1 border-t-4">{renderContent()}</div>
 }
 
 function ShoppingCart() {
@@ -46,9 +50,7 @@ function ShoppingCart() {
             Clear Cart
           </button>
         </div>
-        <div className="flex basis-10/12 grow-0 border-t-4">
-          <ShoppingCartContent />
-        </div>
+        <ShoppingCartContent />
         <div className="basis-1/12">
           <div className="border-t-4 text-sm">
             <p className="font-semibold my-2">Resumen de compra</p>
