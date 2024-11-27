@@ -15,8 +15,9 @@ function ProductLineItem({ lineItem }: ProductLineItemProps) {
         <Image
           src={lineItem.image}
           alt={lineItem.title}
-          width={35}
-          height={35}
+          width={36}
+          height={36}
+          className="h-9 w-9 object-contain"
         />
       </div>
       <div className="basis-8/12">
