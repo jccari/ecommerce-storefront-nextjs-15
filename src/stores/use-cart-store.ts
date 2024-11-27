@@ -40,14 +40,15 @@ const initialState: CartStoreState = {
   },
 }
 
-const initialStoreState: CartStoreState = storedCart
+const initialPersistedState: CartStoreState = storedCart
   ? JSON.parse(storedCart)
   : initialState
 
 const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
-      ...initialStoreState,
+      ...initialState,
+      ...initialPersistedState,
       addToCart: (product: Product) => {
         const lineItem = get().cart.find((p) => p.id === product.id)
 
