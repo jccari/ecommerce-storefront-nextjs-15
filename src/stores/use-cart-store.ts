@@ -24,8 +24,12 @@ type CartStoreActions = {
 
 type CartStore = CartStoreState & CartStoreActions
 
-// TODO: We could use a more robust storage solution
-const storedCart = localStorage.getItem(StorageKey)
+let storedCart = null
+
+if (typeof window !== "undefined") {
+  // TODO: We could use a more robust storage solution
+  storedCart = window.localStorage.getItem(StorageKey)
+}
 
 const initialState: CartStoreState = {
   cart: [],
