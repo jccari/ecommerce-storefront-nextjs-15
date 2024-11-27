@@ -21,8 +21,8 @@ export default function ProductCard({ product }: ProductCardProps) {
         width={100}
         height={100}
       />
-      <p>{product.title}</p>
-      <p>${product.price}</p>
+      <p className="line-clamp-2 text-sm font-medium">{product.title}</p>
+      <p className="text-sm font-medium">${product.price}</p>
       <button
         className="bg-blue-500 text-white px-4 py-2 rounded-lg"
         onClick={() => addToCart(product)}
