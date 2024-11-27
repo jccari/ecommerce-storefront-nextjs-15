@@ -13,9 +13,9 @@ export default function ProductCard({ product }: ProductCardProps) {
   const addToCart = useCartStore((state) => state.addToCart)
 
   return (
-    <div className="flex flex-col justify-between bg-white shadow-md rounded-lg p-4 gap-4 hover:shadow-zinc-600 w-72 ">
+    <div className="flex flex-col justify-between bg-white shadow-md rounded-lg p-4 gap-4 hover:shadow-zinc-600 w-72 h-80">
       <Image
-        className="self-center"
+        className="self-center object-contain h-24 w-24"
         src={product.image}
         alt={product.title}
         width={100}
