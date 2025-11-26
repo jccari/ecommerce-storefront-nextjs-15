@@ -79,9 +79,15 @@ const useCartStore = create<CartStore>()(
         }))
       },
       removeFromCart: (lineItemId: number) => {
-        set((state) => ({
-          cart: state.cart.filter((p) => p.id !== lineItemId),
-        }))
+
+        set((state) => {
+            const filteredCart = state.cart.filter((p) => p.id !== lineItemId)
+
+            return {
+                cart: filteredCart,
+                priceLines: updatePriceLines(filteredCart),
+            }
+        })
       },
       clearCart: () => {
         set(initialState)
