@@ -5,7 +5,7 @@ import OrderSummary from "./components/order-summary"
 
 export default function CheckoutPage() {
     return (
-        <div className="h-screen w-screen bg-gray-50 overflow-hidden flex flex-col font-sans">
+        <div className="h-screen w-screen overflow-hidden flex flex-col font-sans">
             <div className="flex-1 py-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                     <div className="mb-8">
