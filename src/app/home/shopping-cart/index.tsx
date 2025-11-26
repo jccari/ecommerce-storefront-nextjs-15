@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 
 import ProductLineItem from "@/components/product-line-item"
 import useCartStore from "@/stores/use-cart-store"
@@ -62,9 +63,9 @@ function ShoppingCart() {
             <PriceLine concept="Taxes IGV" value={priceLines.taxes} />
             <PriceLine concept="Total" value={priceLines.total} />
           </div>
-          <button className="w-full bg-blue-500 text-white mt-3 px-4 py-2 rounded-lg">
+          <Link href="/checkout" className="block w-full text-center bg-blue-500 text-white mt-3 px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
             Purchase
-          </button>
+          </Link>
         </div>
       </div>
     </div>
